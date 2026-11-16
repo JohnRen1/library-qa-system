@@ -63,6 +63,7 @@ function ResultScreen({ result, total, onAgain }: { result: RecordRow; total: nu
               <li key={row.id} className={row.id === result.id ? 'mine' : ''}>
                 <span className={`place place-${index + 1}`}>{index + 1}</span>
                 <span className="who">{row.name}</span>
+                <span className="score" aria-label={`答对 ${row.score} 题`}>{row.score}/{total}</span>
                 <span className="time">{formatDuration(row.finalDuration)}</span>
               </li>
             ))}

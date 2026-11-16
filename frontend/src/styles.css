@@ -321,7 +321,7 @@
 
 .board li {
   display: grid;
-  grid-template-columns: 28px 1fr auto;
+  grid-template-columns: 28px 1fr auto auto;
   align-items: center;
   gap: 10px;
   min-height: 44px;
@@ -369,6 +369,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 15px;
+}
+
+.score {
+  color: #178a45;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .time {
