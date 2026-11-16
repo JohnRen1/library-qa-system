@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { questions } from '../../shared/questions'
-import { formatDuration, loadStoredRows, maskPhone, saveRows, validPhone } from '../../shared/records'
+import { formatDuration, formatSpokenDuration, leaderboardRows, loadStoredRows, maskPhone, saveRows, validPhone } from '../../shared/records'
 import type { RecordRow } from '../../shared/types'
 
 type Screen = 'intro' | 'quiz' | 'result'
@@ -18,6 +18,59 @@ function Check() {
     <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
       <path d="M3.5 8.2 6.4 11l6.1-6.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  )
+}
+
+function Trophy() {
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+      <path d="M11 7h14v8.2a7 7 0 0 1-14 0V7Z" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M11 9H7.5A3.5 3.5 0 0 0 11 14.2M25 9h3.5A3.5 3.5 0 0 1 25 14.2M18 22.2V26M13.5 29h9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+function ResultScreen({ result, total, onAgain }: { result: RecordRow; total: number; onAgain: () => void }) {
+  const board = leaderboardRows()
+  const rank = Math.max(1, board.findIndex((row) => row.id === result.id) + 1)
+
+  return (
+    <main id="main" className="quiz-page finish">
+      <div className="frame">
+        <div className="finish-hero">
+          <span className="trophy"><Trophy /></span>
+          <h1>答题完成</h1>
+          <p>{result.name}，你已完成全部题目</p>
+        </div>
+        <section className="rank-card">
+          <span>当前排名</span>
+          <strong>第 {rank} 名</strong>
+        </section>
+        <div className="stat-grid">
+          <div><span>原始用时</span><b>{formatSpokenDuration(result.baseDuration)}</b></div>
+          <div><span>答对题数</span><b className="good">{result.score} / {total}</b></div>
+          <div><span>答错题数</span><b className="bad">{result.wrongCount} 道</b></div>
+          <div><span>净用时</span><b className="net">{formatSpokenDuration(result.finalDuration)}</b></div>
+        </div>
+        <p className="formula">净用时 = 原始用时 + 答错题数 × 10 秒<br />（每错一题罚时 10 秒）</p>
+        <section className="board">
+          <header>
+            <h2>实时排行榜</h2>
+            <span>共 {board.length} 人参赛</span>
+          </header>
+          <ol>
+            {board.map((row, index) => (
+              <li key={row.id} className={row.id === result.id ? 'mine' : ''}>
+                <span className={`place place-${index + 1}`}>{index + 1}</span>
+                <span className="who">{row.name}</span>
+                <span className="time">{formatDuration(row.finalDuration)}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <button className="primary" type="button" onClick={onAgain}>再答一次</button>
+      </div>
+    </main>
   )
 }
 
@@ -216,24 +269,7 @@ function App() {
         </main>
       )}
       {screen === 'result' && result && (
-        <main id="main" className="quiz-page">
-          <div className="frame">
-            <header className="top">
-              <span />
-              <h1>民俗知识挑战</h1>
-              <span />
-            </header>
-            <section className="sheet result">
-              <h2>{result.name}，答题完成</h2>
-              <dl>
-                <div><dt>答对</dt><dd>{result.score} / {questions.length}</dd></div>
-                <div><dt>用时</dt><dd>{formatDuration(result.finalDuration)}</dd></div>
-                <div><dt>惩罚</dt><dd>{result.penaltySeconds} 秒</dd></div>
-              </dl>
-              <button className="primary" type="button" onClick={reset}>再答一次</button>
-            </section>
-          </div>
-        </main>
+        <ResultScreen result={result} total={questions.length} onAgain={reset} />
       )}
     </>
   )

@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
-import { formatDuration, loadStoredRows, sampleRows } from '../../shared/records'
+import { formatDuration, leaderboardRows, loadStoredRows } from '../../shared/records'
 import type { RecordRow } from '../../shared/types'
 
 function readLedger() {
-  const stored = loadStoredRows()
-  const storedIds = new Set(stored.map((row) => row.id))
-  const samples = sampleRows().filter((row) => !storedIds.has(row.id))
   return {
-    rows: [...samples, ...stored],
-    sample: stored.length === 0,
+    rows: leaderboardRows(),
+    sample: loadStoredRows().length === 0,
   }
 }
 
@@ -25,7 +22,7 @@ function App() {
     }
   }, [])
 
-  const rows = [...ledger.rows].sort((a, b) => a.finalDuration - b.finalDuration || a.submittedAt.localeCompare(b.submittedAt))
+  const rows = ledger.rows
 
   return (
     <>

@@ -30,6 +30,21 @@ export function sampleRows() {
   return mockRows
 }
 
+export function leaderboardRows(): RecordRow[] {
+  const stored = loadStoredRows()
+  const storedIds = new Set(stored.map((row) => row.id))
+  const samples = mockRows.filter((row) => !storedIds.has(row.id))
+  return [...samples, ...stored].sort((a, b) => b.score - a.score || a.finalDuration - b.finalDuration || a.submittedAt.localeCompare(b.submittedAt))
+}
+
+export function formatSpokenDuration(seconds: number) {
+  const minutes = Math.floor(seconds / 60)
+  const remain = seconds % 60
+  if (minutes < 60) return `${minutes}分${remain}秒`
+  const hours = Math.floor(minutes / 60)
+  return `${hours}小时${minutes % 60}分${remain}秒`
+}
+
 export function saveRows(rows: RecordRow[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(rows))
 }

@@ -5,8 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('.', import.meta.url))
 
-export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/qa-front/' : '/',
+export default defineConfig({
   plugins: [
     react(),
     {
@@ -32,4 +31,4 @@ export default defineConfig(({ command }) => ({
       },
     },
   },
-}))
+})
