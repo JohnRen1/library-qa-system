@@ -213,8 +213,7 @@
 }
 
 .finish-hero p,
-.formula,
-.board header span {
+.formula {
   color: #5c6570;
   font-size: 13px;
   line-height: 1.6;
@@ -225,8 +224,7 @@
 }
 
 .rank-card,
-.stat-grid div,
-.board {
+.stat-grid div {
   background: #fff;
   border: 1px solid #e6e8eb;
   border-radius: 12px;
@@ -294,94 +292,6 @@
 .formula {
   margin: 12px 8px 18px;
   text-align: center;
-}
-
-.board {
-  padding: 14px 14px 6px;
-}
-
-.board header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.board h2 {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.board ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.board li {
-  display: grid;
-  grid-template-columns: 28px 1fr auto auto;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  border-top: 1px solid #eef0f2;
-}
-
-.board li.mine {
-  margin: 0 -8px;
-  padding: 0 8px;
-  border-radius: 8px;
-  background: #f3f7ff;
-}
-
-.place {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #eef1f4;
-  color: #3d4450;
-  font-size: 12px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.place-1 {
-  background: #f6c445;
-  color: #6b4e00;
-}
-
-.place-2 {
-  background: #e4e7ec;
-  color: #3d4450;
-}
-
-.place-3 {
-  background: #f3c7a1;
-  color: #7a4512;
-}
-
-.who {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 15px;
-}
-
-.score {
-  color: #178a45;
-  font-size: 14px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.time {
-  color: #3d4450;
-  font-size: 14px;
-  font-variant-numeric: tabular-nums;
 }
 
 .finish .primary {

@@ -53,22 +53,6 @@ function ResultScreen({ result, total, onAgain }: { result: RecordRow; total: nu
           <div><span>净用时</span><b className="net">{formatSpokenDuration(result.finalDuration)}</b></div>
         </div>
         <p className="formula">净用时 = 原始用时 + 答错题数 × 10 秒<br />（每错一题罚时 10 秒）</p>
-        <section className="board">
-          <header>
-            <h2>实时排行榜</h2>
-            <span>共 {board.length} 人参赛</span>
-          </header>
-          <ol>
-            {board.map((row, index) => (
-              <li key={row.id} className={row.id === result.id ? 'mine' : ''}>
-                <span className={`place place-${index + 1}`}>{index + 1}</span>
-                <span className="who">{row.name}</span>
-                <span className="score" aria-label={`答对 ${row.score} 题`}>{row.score}/{total}</span>
-                <span className="time">{formatDuration(row.finalDuration)}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
         <button className="primary" type="button" onClick={onAgain}>再答一次</button>
       </div>
     </main>

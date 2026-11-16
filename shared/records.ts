@@ -34,7 +34,7 @@ export function leaderboardRows(): RecordRow[] {
   const stored = loadStoredRows()
   const storedIds = new Set(stored.map((row) => row.id))
   const samples = mockRows.filter((row) => !storedIds.has(row.id))
-  return [...samples, ...stored].sort((a, b) => b.score - a.score || a.finalDuration - b.finalDuration || a.submittedAt.localeCompare(b.submittedAt))
+  return [...samples, ...stored].sort((a, b) => a.finalDuration - b.finalDuration || a.submittedAt.localeCompare(b.submittedAt))
 }
 
 export function formatSpokenDuration(seconds: number) {
