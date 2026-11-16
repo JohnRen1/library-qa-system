@@ -1,0 +1,71 @@
+@import "../../shared/base.css";
+
+.ledger {
+  width: min(100% - 32px, 960px);
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) 0 max(24px, env(safe-area-inset-bottom));
+}
+
+.ledger-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ledger-head h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ledger-head p,
+.empty {
+  color: #3d4450;
+  font-size: 14px;
+}
+
+.table-wrap {
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eef0f2;
+  vertical-align: top;
+}
+
+th {
+  color: #3d4450;
+  font-weight: 600;
+  background: #fafbfc;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+td small {
+  display: block;
+  margin-top: 4px;
+  color: #3d4450;
+  font-size: 12px;
+}
+
+td:nth-child(2) {
+  min-width: 0;
+  word-break: break-word;
+}

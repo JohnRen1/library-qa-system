@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build
+dist/
+*.tsbuildinfo
+
+# local env and secrets
+.env
+.env.*
+!.env.example
+
+# CloudBase local login
+.cloudbase/
+
+# logs
+*.log
+npm-debug.log*
+
+# system
+.DS_Store
+
+# editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
